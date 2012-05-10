@@ -1,15 +1,46 @@
 Users
-name
-surname
-team
-position
-phone
-rental_count
-overdue_count
+    id
+    name
+    surname
+    team
+    position
+    phone
+    nationality
+    rental_count
+    overdue_count
 
 Media
+    id
+    title
+    description
+    type
+    release_year
+    producer
+    language
+    episode_number
+    season
+    genre
+    length
+    location
+    availability
+
+Artist
+    id
+    media_id
+    name
+    type
+
+Movies
+
 
 LoanHistory
+    id
+    user_id
+    media_id
+    rent_start
+    rent_estimated
+    rent_effective
+
 
 1.
 SELECT * FROM Users WHERE id=$id;
