@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  surname: MyString
+  team: MyString
+  position: MyString
+  phone: MyString
+  rental_count: 1
+  overdue_count: 1
+
+two:
+  name: MyString
+  surname: MyString
+  team: MyString
+  position: MyString
+  phone: MyString
+  rental_count: 1
+  overdue_count: 1
