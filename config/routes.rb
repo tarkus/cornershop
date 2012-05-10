@@ -1,6 +1,7 @@
 Cornershop::Application.routes.draw do
 
 	match 'media/search' => 'media#search'
+	match 'media/cast' => 'media#cast'
   resources :media
   resources :users
   resources :loan_histories

@@ -5,7 +5,24 @@
 <%= form_tag '/media/search', :method => 'get' do %>
 	<%= label_tag(:q, "Title: ") %>
 	<%= text_field_tag(:q) %>
+
+	<%= label_tag(:media_type, "Media Type: ") %>
+	<%= text_field_tag(:media_type) %>
+
+	<%= label_tag(:year, "Year: ") %>
+	<%= text_field_tag(:year) %>
+
+	<%= label_tag(:availability, "Availability: ") %>
+	<%= text_field_tag(:availability) %>
+
 	<%= submit_tag "Search" %>
+<% end %>
+
+<%= form_tag '/media/cast', :method => 'get' do %>
+	<%= label_tag(:cast, "Cast: ") %>
+	<%= text_field_tag(:cast) %>
+
+	<%= submit_tag "Search By Cast" %>
 <% end %>
 </div>
 

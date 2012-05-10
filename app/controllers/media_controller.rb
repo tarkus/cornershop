@@ -83,6 +83,26 @@ class MediaController < ApplicationController
 
 	def search
 		@media = Medium.where("title LIKE ?", "%#{params[:q]}%")
+		unless params[:media_type].empty?
+			@media = @media.where("media_type = ?", params[:media_type])
+		end
+		unless params[:year].empty?
+			@media = @media.where("year = ?", params[:year])
+		end
+		unless params[:availability].empty?
+			@media = @media.where("availability = ?", params[:availability])
+		end
+		
+		@search_result = true
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @media }
+    end
+	end
+
+	def cast
+		@media = Medium.where("cast LIKE ?", "%#{params[:cast]}%")
+		
 		@search_result = true
     respond_to do |format|
       format.html { render :index }
