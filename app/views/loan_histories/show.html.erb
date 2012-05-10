@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @loan_history.user_id %>
+</p>
+
+<p>
+  <b>Media:</b>
+  <%= @loan_history.media_id %>
+</p>
+
+<p>
+  <b>Rent start:</b>
+  <%= @loan_history.rent_start %>
+</p>
+
+<p>
+  <b>Rent estimated:</b>
+  <%= @loan_history.rent_estimated %>
+</p>
+
+<p>
+  <b>Rent effective:</b>
+  <%= @loan_history.rent_effective %>
+</p>
+
+
+<%= link_to 'Edit', edit_loan_history_path(@loan_history) %> |
+<%= link_to 'Back', loan_histories_path %>

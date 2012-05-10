@@ -1,0 +1,37 @@
+<%= form_for(@loan_history) do |f| %>
+  <% if @loan_history.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@loan_history.errors.count, "error") %> prohibited this loan_history from being saved:</h2>
+
+      <ul>
+      <% @loan_history.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :media_id %><br />
+    <%= f.text_field :media_id %>
+  </div>
+  <div class="field">
+    <%= f.label :rent_start %><br />
+    <%= f.date_select :rent_start %>
+  </div>
+  <div class="field">
+    <%= f.label :rent_estimated %><br />
+    <%= f.date_select :rent_estimated %>
+  </div>
+  <div class="field">
+    <%= f.label :rent_effective %><br />
+    <%= f.date_select :rent_effective %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<h1>Listing loan_histories</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Media</th>
+    <th>Rent start</th>
+    <th>Rent estimated</th>
+    <th>Rent effective</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @loan_histories.each do |loan_history| %>
+  <tr>
+    <td><%= loan_history.user_id %></td>
+    <td><%= loan_history.media_id %></td>
+    <td><%= loan_history.rent_start %></td>
+    <td><%= loan_history.rent_estimated %></td>
+    <td><%= loan_history.rent_effective %></td>
+    <td><%= link_to 'Show', loan_history %></td>
+    <td><%= link_to 'Edit', edit_loan_history_path(loan_history) %></td>
+    <td><%= link_to 'Destroy', loan_history, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Loan history', new_loan_history_path %>
