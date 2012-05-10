@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @medium.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @medium.description %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @medium.type %>
+</p>
+
+<p>
+  <b>Release year:</b>
+  <%= @medium.release_year %>
+</p>
+
+<p>
+  <b>Language:</b>
+  <%= @medium.language %>
+</p>
+
+<p>
+  <b>Producer:</b>
+  <%= @medium.producer %>
+</p>
+
+<p>
+  <b>Cast:</b>
+  <%= @medium.cast %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @medium.location %>
+</p>
+
+<p>
+  <b>Availability:</b>
+  <%= @medium.availability %>
+</p>
+
+
+<%= link_to 'Edit', edit_medium_path(@medium) %> |
+<%= link_to 'Back', media_path %>

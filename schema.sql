@@ -15,23 +15,11 @@ Media
     description
     type
     release_year
-    producer
     language
-    episode_number
-    season
-    genre
-    length
+    producer
+		cast
     location
     availability
-
-Artist
-    id
-    media_id
-    name
-    type
-
-Movies
-
 
 LoanHistory
     id

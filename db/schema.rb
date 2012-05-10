@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510015018) do
+ActiveRecord::Schema.define(:version => 20120510034341) do
+
+  create_table "media", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "type"
+    t.integer  "release_year"
+    t.string   "language"
+    t.string   "producer"
+    t.string   "cast"
+    t.string   "location"
+    t.integer  "availability"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  description: MyString
+  type: 
+  release_year: 1
+  language: MyString
+  producer: MyString
+  cast: MyString
+  location: MyString
+  availability: 1
+
+two:
+  title: MyString
+  description: MyString
+  type: 
+  release_year: 1
+  language: MyString
+  producer: MyString
+  cast: MyString
+  location: MyString
+  availability: 1
