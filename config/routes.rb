@@ -1,8 +1,9 @@
 Cornershop::Application.routes.draw do
-  resources :media
-	match 'media/search' => 'media#search'
 
+	match 'media/search' => 'media#search'
+  resources :media
   resources :users
+  resources :loan_histories
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

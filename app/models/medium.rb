@@ -1,3 +1,4 @@
 class Medium < ActiveRecord::Base
-  attr_accessible :availability, :cast, :description, :language, :location, :producer, :release_year, :title, :type
+	has_many :loan_histories
+  attr_accessible :availability, :cast, :language, :location, :producer, :year, :title, :media_type
 end

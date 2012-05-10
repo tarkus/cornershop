@@ -82,9 +82,10 @@ class MediaController < ApplicationController
   end
 
 	def search
-		@media = Medium.where("title = ?", params[:title])
+		@media = Medium.where("title LIKE ?", "%#{params[:q]}%")
+		@search_result = true
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :index }
       format.json { render json: @media }
     end
 	end

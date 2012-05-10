@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 
+  media_id: 
+  rent_start: 2012-05-10
+  rent_estimated: 2012-05-10
+  rent_effective: 2012-05-10
+
+two:
+  user_id: 
+  media_id: 
+  rent_start: 2012-05-10
+  rent_estimated: 2012-05-10
+  rent_effective: 2012-05-10

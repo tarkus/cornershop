@@ -1,17 +1,22 @@
-<h1>Listing media</h1>
+<h1><%= @search_result.nil? ? "Listing media" : "Listing media search results" %></h1>
 
+<div style="margin: 20px 0">
 <h3>Search</h3>
-<% form_tag media_path, :method => 'get' do %>
-	Title: <%= text_field_tag :search, params[:search] %>
-	<%= submit_tag "Search", :name => nil %>
+<%= form_tag '/media/search', :method => 'get' do %>
+	<%= label_tag(:q, "Title: ") %>
+	<%= text_field_tag(:q) %>
+	<%= submit_tag "Search" %>
 <% end %>
+</div>
 
+<% if @media.empty? %>
+	<p>No results found.
+<% else %>
 <table>
   <tr>
     <th>Title</th>
-    <th>Description</th>
     <th>Type</th>
-    <th>Release year</th>
+    <th>Year</th>
     <th>Language</th>
     <th>Producer</th>
     <th>Cast</th>
@@ -25,9 +30,8 @@
 <% @media.each do |medium| %>
   <tr>
     <td><%= medium.title %></td>
-    <td><%= medium.description %></td>
-    <td><%= medium.type %></td>
-    <td><%= medium.release_year %></td>
+    <td><%= medium.media_type %></td>
+    <td><%= medium.year %></td>
     <td><%= medium.language %></td>
     <td><%= medium.producer %></td>
     <td><%= medium.cast %></td>
@@ -37,8 +41,9 @@
     <td><%= link_to 'Edit', edit_medium_path(medium) %></td>
     <td><%= link_to 'Destroy', medium, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
-<% end %>
+<% end # each loop %>
 </table>
+<% end # if statement %>
 
 <br />
 

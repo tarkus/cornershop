@@ -1,0 +1,2 @@
+module LoanHistoriesHelper
+end
