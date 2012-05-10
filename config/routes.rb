@@ -1,5 +1,6 @@
 Cornershop::Application.routes.draw do
   resources :media
+	match 'media/search' => 'media#search'
 
   resources :users
 

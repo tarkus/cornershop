@@ -15,11 +15,11 @@ ActiveRecord::Schema.define(:version => 20120510034341) do
 
   create_table "media", :force => true do |t|
     t.string   "title"
-    t.string   "description"
     t.string   "type"
-    t.integer  "release_year"
+    t.integer  "year"
     t.string   "language"
     t.string   "producer"
+    t.string   "artist"
     t.string   "cast"
     t.string   "location"
     t.integer  "availability"
@@ -27,16 +27,25 @@ ActiveRecord::Schema.define(:version => 20120510034341) do
     t.datetime "updated_at",   :null => false
   end
 
+  add_index "media", ["cast"], :name => "index_media_on_cast"
+  add_index "media", ["title"], :name => "index_media_on_title"
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "surname"
     t.string   "team"
     t.string   "position"
     t.string   "phone"
+    t.string   "nationality"
     t.integer  "rental_count"
     t.integer  "overdue_count"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  add_index "users", ["name"], :name => "index_users_on_name"
+  add_index "users", ["overdue_count"], :name => "index_users_on_overdue_count"
+  add_index "users", ["rental_count"], :name => "index_users_on_rental_count"
+  add_index "users", ["surname"], :name => "index_users_on_surname"
 
 end

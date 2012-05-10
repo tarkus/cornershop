@@ -80,4 +80,12 @@ class MediaController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+	def search
+		@media = Medium.where("title = ?", params[:title])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @media }
+    end
+	end
 end

@@ -9,17 +9,21 @@ Users
     rental_count
     overdue_count
 
+		index name surname overdue_count rental_count
+
 Media
     id
     title
-    description
     type
-    release_year
+    year
     language
     producer
-		cast
+		artist # (director / band name)
+		cast # or band members; comma separated
     location
     availability
+
+		index title cast 
 
 LoanHistory
     id
@@ -29,6 +33,7 @@ LoanHistory
     rent_estimated
     rent_effective
 
+		index user_id media_id rent_start rent_effective
 
 1.
 SELECT * FROM Users WHERE id=$id;
@@ -98,7 +103,7 @@ ROLLBACK;
 
 # New Return
 UPDATE LoanHistory SET rent_effective = CURRENT_DATE() WHERE id = 1;
-# If rent_effective date is past rent_estimated (make sure to use transaction!)
+# Put in cronjob - if rent_effective date is past rent_estimated (make sure to use transaction!)
     UPDATE Users SET overdue_count = overdue_count + 1 WHERE user_id = $user_id;
 
 UPDATE Media SET availability = 1 WHERE id = $media_id;
