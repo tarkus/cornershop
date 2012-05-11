@@ -1,5 +1,8 @@
+<h2>User Details</h2>
+
 <p id="notice"><%= notice %></p>
 
+<div>
 <p>
   <b>Name:</b>
   <%= @user.name %>
@@ -34,7 +37,41 @@
   <b>Overdue count:</b>
   <%= @user.overdue_count %>
 </p>
-
+</div>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+
+<h2>Loan History</h2>
+<table>
+	<tr>
+		<th>Title</th>
+		<th>Year</th>
+		<th>Rental Start</th>
+		<th>Rental Due</th>
+		<th>Rental Returned</th>
+		<th>Overdue?</th>
+	</tr>
+	<% @loan_histories.each do |loan| %>
+	<tr>
+		<td><%= loan.medium.title %></td>
+		<td><%= loan.medium.year %></td>
+		<td><%= loan.rent_start %></td>
+		<td><%= loan.rent_estimated %></td>
+		<td><%= loan.rent_effective.nil? ? "Active" : loan.rent_effective.to_s %></td>
+		<td><% if loan.rent_effective.nil? %>
+			<% if Date.today > loan.rent_estimated %>
+				OVERDUE!
+			<% else %>
+				Safe
+			<% end %>
+		<% elsif loan.rent_effective > loan.rent_estimated %>
+			OVERDUE!
+		<% else %>
+			Safe
+		<% end %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
