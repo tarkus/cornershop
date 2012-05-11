@@ -65,7 +65,7 @@ def main():
     for i in range(0, len(media)):
         item = media[i]
         sql.append("INSERT INTO media (`title`, `media_type`, `year`, `language`, `producer`, `artist`, `cast`, `location`, `availability`, `created_at`, `updated_at`) VALUES \
-                ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');" % (item['title'], item['type'], item['year'], random_language(), random_producer(), item['artist'], ",".join(item['cast']), item['location'], "1", now, now))
+                ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');" % (item['title'].encode('utf-8'), item['type'], item['year'], random_language(), random_producer(), item['artist'], ",".join(item['cast']), item['location'], "1", now, now))
 
     content = "\n".join(sql)
     open("Media.sql", "w").write(content)

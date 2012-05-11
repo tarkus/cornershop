@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 
 import Media
-import LoanHistory
+import LoanHistories
 import Users
 
 if __name__ == "__main__":
@@ -15,5 +15,5 @@ if __name__ == "__main__":
   content += Media.main()
   content += "# LoanHistories\n"
   content += "#==============\n"
-  content += LoanHistory.main()
+  content += LoanHistories.main()
   open("All.sql", "w").write(content)
