@@ -2,7 +2,18 @@ class LoanHistoriesController < ApplicationController
   # GET /loan_histories
   # GET /loan_histories.json
   def index
-    @loan_histories = LoanHistory.all
+    # @loan_histories = LoanHistory.joins(:user).joins(:medium).order("CURDATE() - rent_estimated AS overdue").all
+		@active_loan_histories = LoanHistory.find_by_sql(
+			"SELECT loan_histories.id, loan_histories.user_id, loan_histories.medium_id, loan_histories.rent_start, loan_histories.rent_estimated, loan_histories.rent_effective, CURDATE() - loan_histories.rent_estimated AS overdue 
+			FROM loan_histories, users, media 
+			WHERE users.id = loan_histories.user_id AND media.id = loan_histories.medium_id AND loan_histories.rent_effective IS NULL
+			ORDER BY overdue DESC")
+
+		@inactive_loan_histories = LoanHistory.find_by_sql(
+			"SELECT loan_histories.id, loan_histories.user_id, loan_histories.medium_id, loan_histories.rent_start, loan_histories.rent_estimated, loan_histories.rent_effective, CURDATE() - loan_histories.rent_estimated AS overdue 
+			FROM loan_histories, users, media 
+			WHERE users.id = loan_histories.user_id AND media.id = loan_histories.medium_id AND loan_histories.rent_effective IS NOT NULL
+			ORDER BY overdue DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -80,4 +91,30 @@ class LoanHistoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+	def checkin
+		@media = Medium.find(params[:medium_id])
+    respond_to do |format|
+      format.html # checkin.html.erb
+      format.json { head :no_content }
+    end
+	end
+
+	def checkin_commit
+		# Transaction
+	  @media = Medium.find(params[:medium_id])
+		@media.availability = 1
+		@media.location = params[:location]
+
+		@loan = LoanHistory.where("medium_id = ?", params[:medium_id]).where("rent_effective IS NULL")
+		@loan.first.rent_effective = Date.today
+
+		@media.save
+		@loan.first.save
+
+    respond_to do |format|
+      format.html { redirect_to media_url, notice: 'Media was returned with new location.' }
+      format.json { head :no_content }
+    end
+	end
 end

@@ -3,7 +3,14 @@ Cornershop::Application.routes.draw do
 	match 'media/search' => 'media#search'
 	match 'media/cast' => 'media#cast'
   resources :media
+
+	match 'users/top' => 'users#top'
+	match 'users/overdue' => 'users#overdue'
+	match 'users/forgiveness/:id' => 'users#forgiveness'
   resources :users
+
+	match 'loan_histories/checkin/:medium_id' => 'loan_histories#checkin'
+	match 'loan_histories/checkin_commit' => 'loan_histories#checkin_commit'
   resources :loan_histories
 
   # The priority is based upon order of creation:

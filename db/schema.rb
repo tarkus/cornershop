@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510074232) do
+ActiveRecord::Schema.define(:version => 20120511015640) do
 
   create_table "loan_histories", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "media_id"
+    t.integer  "medium_id"
     t.date     "rent_start"
     t.date     "rent_estimated"
     t.date     "rent_effective"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20120510074232) do
     t.datetime "updated_at",     :null => false
   end
 
-  add_index "loan_histories", ["media_id"], :name => "index_loan_histories_on_media_id"
+  add_index "loan_histories", ["medium_id"], :name => "index_loan_histories_on_media_id"
   add_index "loan_histories", ["rent_effective"], :name => "index_loan_histories_on_rent_effective"
   add_index "loan_histories", ["rent_start"], :name => "index_loan_histories_on_rent_start"
   add_index "loan_histories", ["user_id"], :name => "index_loan_histories_on_user_id"

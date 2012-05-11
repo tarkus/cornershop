@@ -1,5 +1,7 @@
 <h1><%= @search_result.nil? ? "Listing media" : "Listing media search results" %></h1>
 
+<p id="notice"><%= notice %></p>
+
 <div style="margin: 20px 0">
 <h3>Search</h3>
 <%= form_tag '/media/search', :method => 'get' do %>

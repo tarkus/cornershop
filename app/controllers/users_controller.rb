@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+		@loan_histories = LoanHistory.joins(:medium).where("user_id = ?", params[:id]).order("rent_start")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -80,4 +81,63 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+	def top
+		@top_users = User.find_by_sql(
+			"SELECT DISTINCT name, surname, team, position, (SELECT COUNT(*) FROM loan_histories WHERE loan_histories.user_id = users.id) AS rentals
+			FROM users, loan_histories 
+			WHERE loan_histories.user_id = users.id 
+			ORDER BY rentals DESC")
+
+		respond_to do |format|
+      format.html # top.html.erb
+      format.json { render json: @top_users }
+		end
+	end
+
+	def overdue
+		@overdue_users = User.find_by_sql(
+			"SELECT DISTINCT users.id, name, surname, team, position, 
+				(SELECT COUNT(*) FROM loan_histories 
+					WHERE loan_histories.user_id = users.id 
+					AND (loan_histories.rent_effective > loan_histories.rent_estimated 
+					OR (loan_histories.rent_effective IS NULL AND CURDATE() > loan_histories.rent_estimated)))
+					AS overdue 
+			FROM users, loan_histories 
+			WHERE loan_histories.user_id = users.id 
+			ORDER BY overdue DESC")
+
+		respond_to do |format|
+      format.html # overdue.html.erb
+      format.json { render json: @overdue_users }
+		end
+	end
+
+  def forgiveness
+    @late_returns = LoanHistory.where("user_id = ?", params[:id])
+
+    unless @late_returns.nil? or @late_returns.empty?
+			@late_returns.each do |late|
+				if !late.rent_effective.nil? and late.rent_effective > late.rent_estimated
+					late.rent_effective = late.rent_estimated
+					late.save
+				end
+			end
+    end
+
+    #find_by_sql("UPDATE loan_histories SET rent_effective=rent_estimated
+    #  WHERE rent_effective > rent_estimated AND user_id=?", params[:user_id])
+
+    respond_to do |format|
+			if @late_returns.nil? or @late_returns.empty?
+				format.html { 
+					redirect_to '/users/overdue', notice: "User #{params[:id]} does not exist or has no loan history." 
+				}
+				format.json { head :no_content }
+			else
+				format.html { redirect_to '/users/overdue', notice: "User #{params[:id]} has been forgiven and no longer has any overdue entries!" }
+				format.json { head :no_content }
+			end
+    end
+	end
 end
