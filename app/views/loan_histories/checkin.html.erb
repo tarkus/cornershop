@@ -1,0 +1,15 @@
+<h1>Checkin Item</h1>
+
+<p>Item Name: <%= @media.title %></p>
+<p>Location: <%= @media.location %></p>
+
+<p>Please enter new location:</p>
+<%= form_tag '/loan_histories/checkin_commit', :method => "post" do %>
+  <div class="field">
+		<input type="hidden" name="medium_id" value="<%= @media.id %>" />
+		<input type="text" name="location" />
+	</div>
+  <div class="actions">
+		<input type="submit" />
+	</div>
+<% end %>

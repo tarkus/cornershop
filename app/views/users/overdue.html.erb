@@ -1,0 +1,26 @@
+<h1>Listing most overdue users</h1>
+
+<p id="notice"><%= notice %></p>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Team</th>
+    <th>Position</th>
+    <th>Overdue count</th>
+    <th></th>
+  </tr>
+
+<% @overdue_users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.surname %></td>
+    <td><%= user.team %></td>
+    <td><%= user.position %></td>
+    <td><%= user.overdue %></td>
+		<td><a href="/users/<%= user.id %>">Show</a></td>
+		<td><a href="/users/forgiveness/<%= user.id %>">Forgive</a></td>
+  </tr>
+<% end %>
+</table>

@@ -1,0 +1,22 @@
+<h1>Listing top users</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Team</th>
+    <th>Position</th>
+    <th>Rental count</th>
+    <th></th>
+  </tr>
+
+<% @top_users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.surname %></td>
+    <td><%= user.team %></td>
+    <td><%= user.position %></td>
+    <td><%= user.rentals %></td>
+  </tr>
+<% end %>
+</table>
